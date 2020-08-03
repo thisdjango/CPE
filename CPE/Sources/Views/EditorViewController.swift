@@ -10,6 +10,7 @@ import UIKit
 
 class EditorViewController: UIViewController {
     // MARK: - private props
+    private var flexibleSpace = UIBarButtonItem()
     private var itemsToolbar = [UIBarButtonItem]()
     private var pictureView: UIImageView = {
         let imageView = UIImageView()
@@ -29,11 +30,8 @@ class EditorViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "Edit"
-        view.backgroundColor = .green
-        createToolBarItem(image: "text", action: #selector(textMode))
-//        createToolBarItem(image: "shapes", action: #selector(shapesMode))
-//        createToolBarItem(image: "eraser", action: #selector(eraserMode))
-        toolbarItems = itemsToolbar
+        view.backgroundColor = .white
+        createToolbarItems()
         layoutConstraints()
     }
     override func viewDidAppear(_ animated: Bool) {
@@ -61,11 +59,24 @@ class EditorViewController: UIViewController {
         configureNavigationItems()
     }
     private func configureNavigationItems() {
-        
+        navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(named: "crop"), style: .plain, target: self, action: #selector(shapesMode))
+        let undoItem = UIBarButtonItem(image: UIImage(named: "undo"), style: .plain, target: self, action: #selector(shapesMode))
+        let redoItem = UIBarButtonItem(image: UIImage(named: "redo"), style: .plain, target: self, action: #selector(shapesMode))
+        navigationItem.rightBarButtonItems = [redoItem, undoItem]
+    }
+    private func createToolbarItems() {
+        flexibleSpace = UIBarButtonItem(barButtonSystemItem: UIBarButtonItem.SystemItem.flexibleSpace, target: self, action: nil)
+        itemsToolbar.append(flexibleSpace)
+        createToolBarItem(image: "text", action: #selector(textMode))
+        createToolBarItem(image: "shapes", action: #selector(shapesMode))
+        createToolBarItem(image: "edit", action: #selector(shapesMode))
+        createToolBarItem(image: "eraser", action: #selector(eraserMode))
+        toolbarItems = itemsToolbar
     }
     private func createToolBarItem(image: String, action: Selector) {
         let barItem = UIBarButtonItem(image: UIImage(named: image), style: .plain, target: self, action: action)
         itemsToolbar.append(barItem)
+        itemsToolbar.append(flexibleSpace)
     }
     
     private func layoutConstraints() {
