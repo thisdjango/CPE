@@ -20,33 +20,16 @@ class ColorCell: UICollectionViewCell {
     override init(frame: CGRect) {
         super.init(frame: frame)
         addSubview(colorView.prepareLayout())
-        colorView.pin()
+        colorView.pin(view: self)
     }
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     override func layoutSubviews() {
         super.layoutSubviews()
-        heightAnchor.constraint(equalToConstant: 20).isActive = true
-        widthAnchor.constraint(equalToConstant: 20).isActive = true
         colorView.layer.cornerRadius = frame.height / 2
-        colorView.layer.borderWidth = 3
-        colorView.layer.borderColor = UIColor.white.cgColor
-    }
-}
-
-extension UIView {
-    func prepareLayout() -> UIView {
-        translatesAutoresizingMaskIntoConstraints = false
-        return self
-    }
-    func pin() {
-        if let superview = superview {
-            leadingAnchor.constraint(equalTo: superview.leadingAnchor).isActive = true
-            trailingAnchor.constraint(equalTo: superview.trailingAnchor).isActive = true
-            topAnchor.constraint(equalTo: superview.topAnchor).isActive = true
-            bottomAnchor.constraint(equalTo: superview.bottomAnchor).isActive = true
-        }
+        colorView.layer.borderWidth = 1
+        colorView.layer.borderColor = UIColor.lightGray.cgColor
     }
 }
 

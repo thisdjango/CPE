@@ -10,6 +10,8 @@ import UIKit
 
 class EditorViewController: UIViewController {
     // MARK: - private props
+    private var textStyle = TextStyle()
+    private var textString = ""
     private var flexibleSpace = UIBarButtonItem()
     private var itemsToolbar = [UIBarButtonItem]()
     private var pictureView: UIImageView = {
@@ -31,6 +33,10 @@ class EditorViewController: UIViewController {
         super.viewDidLoad()
         title = "Edit"
         view.backgroundColor = .white
+        textStyle = TextStyle(font: "Helvetica Bold", size: 80, color: .gray)
+        colorsView.onSelectColor = { [weak self] color in
+            self?.textStyle.color = color
+        }
         createToolbarItems()
         layoutConstraints()
     }
@@ -44,7 +50,22 @@ class EditorViewController: UIViewController {
     }
     // MARK: - objc methods
     @objc func textMode() {
-        // TODO: - texting
+        let alert = UIAlertController(title: "Text", message: "Enter a text", preferredStyle: .alert)
+
+        alert.addTextField { (textField) in
+            textField.text = ""
+        }
+
+        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { [weak alert] (_) in
+            let textField = alert?.textFields?[0]
+            self.textString = textField?.text ?? ""
+            
+            if let image = self.pictureView.image {
+                self.pictureView.image = EditorHelp.textToImage(with: self.textString, at: CGPoint(x: 300, y: 500), in: image, style: self.textStyle)
+            }
+        }))
+
+        self.present(alert, animated: true)
     }
     @objc func shapesMode() {
         // TODO: - shaping
@@ -82,6 +103,8 @@ class EditorViewController: UIViewController {
     private func layoutConstraints() {
         view.addSubview(pictureView.prepareLayout())
         view.addSubview(colorsView.prepareLayout())
+        pictureView.topAnchor ~= view.topAnchor + 50
+        pictureView.pin(to: [.left, .right], view: view)
         NSLayoutConstraint.activate([
             pictureView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             pictureView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
@@ -91,7 +114,8 @@ class EditorViewController: UIViewController {
         NSLayoutConstraint.activate([
             colorsView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             colorsView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            colorsView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -30)
+            colorsView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -55),
+            colorsView.heightAnchor.constraint(equalToConstant: 20)
         ])
     }
 }

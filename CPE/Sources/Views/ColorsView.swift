@@ -11,18 +11,27 @@ import UIKit
 class ColorsView: UIView {
     var colors: [UIColor] = [.white, .red, .orange, .yellow, .green, .blue, .purple, .black, .brown, .cyan, .gray]
     var collectionView: UICollectionView!
+    var onSelectColor: ((UIColor) -> Void)?
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
+        layoutIfNeeded()
+    }
+    
+    override func layoutSubviews() {
         let layout: UICollectionViewFlowLayout = UICollectionViewFlowLayout()
-        layout.sectionInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
-        layout.itemSize = CGSize(width: frame.width, height: 700)
+        layout.sectionInset = UIEdgeInsets(top: 0, left: 10, bottom: 0, right: 0)
+        layout.scrollDirection = .horizontal
+        layout.itemSize = CGSize(width: frame.width / CGFloat(colors.count), height: frame.height)
 
         collectionView = UICollectionView(frame: frame, collectionViewLayout: layout)
         collectionView.dataSource = self
+        collectionView.delegate = self
         collectionView.register(ColorCell.self, forCellWithReuseIdentifier: ColorCell.cellId)
         collectionView.showsVerticalScrollIndicator = false
         collectionView.backgroundColor = .clear
-        addSubview(collectionView)
+        addSubview(collectionView.prepareLayout())
+        collectionView.pin(view: self)
     }
     
     required init?(coder: NSCoder) {
@@ -40,6 +49,11 @@ extension ColorsView: UICollectionViewDataSource {
             else { return ColorCell() }
         cell.configure(with: colors[indexPath.row])
         return cell
+    }
+}
+extension ColorsView: UICollectionViewDelegate {
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        onSelectColor?(colors[indexPath.row])
     }
 }
 
