@@ -10,14 +10,16 @@ import UIKit
 
 class EditorViewController: UIViewController {
     // MARK: - private props
-    private var textStyle = TextStyle()
-    private var textString = ""
+    private var color: UIColor = .white
+    private var textObjects = [TextObject]()
+    private var drawObjects = [String]()
     private var flexibleSpace = UIBarButtonItem()
     private var itemsToolbar = [UIBarButtonItem]()
     private var pictureView: UIImageView = {
         let imageView = UIImageView()
         imageView.image = UIImage(named: "picture")
         imageView.contentMode = .scaleAspectFit
+        imageView.isUserInteractionEnabled = true
         imageView.backgroundColor = .clear
         return imageView
     }()
@@ -33,9 +35,8 @@ class EditorViewController: UIViewController {
         super.viewDidLoad()
         title = "Edit"
         view.backgroundColor = .white
-        textStyle = TextStyle(font: "Helvetica Bold", size: 80, color: .gray)
         colorsView.onSelectColor = { [weak self] color in
-            self?.textStyle.color = color
+            self?.color = color
         }
         createToolbarItems()
         layoutConstraints()
@@ -50,22 +51,11 @@ class EditorViewController: UIViewController {
     }
     // MARK: - objc methods
     @objc func textMode() {
-        let alert = UIAlertController(title: "Text", message: "Enter a text", preferredStyle: .alert)
-
-        alert.addTextField { (textField) in
-            textField.text = ""
+        let vc = TextFieldController()
+        vc.onDoneEditing = { textObj in
+            self.addTextAsLabel(textObject: textObj)
         }
-
-        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { [weak alert] (_) in
-            let textField = alert?.textFields?[0]
-            self.textString = textField?.text ?? ""
-            
-            if let image = self.pictureView.image {
-                self.pictureView.image = EditorHelp.textToImage(with: self.textString, at: CGPoint(x: 300, y: 500), in: image, style: self.textStyle)
-            }
-        }))
-
-        self.present(alert, animated: true)
+        present(vc, animated: true)
     }
     @objc func shapesMode() {
         // TODO: - shaping
@@ -103,8 +93,8 @@ class EditorViewController: UIViewController {
     private func layoutConstraints() {
         view.addSubview(pictureView.prepareLayout())
         view.addSubview(colorsView.prepareLayout())
-        pictureView.topAnchor ~= view.topAnchor + 50
-        pictureView.pin(to: [.left, .right], view: view)
+        pictureView.topAnchor ^= view.topAnchor + 50
+        pictureView.pinToSuperview([.left, .right])
         NSLayoutConstraint.activate([
             pictureView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             pictureView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
@@ -114,8 +104,15 @@ class EditorViewController: UIViewController {
         NSLayoutConstraint.activate([
             colorsView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             colorsView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            colorsView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -55),
+            colorsView.bottomAnchor.constraint(equalTo: navigationController?.toolbar.topAnchor ?? view.bottomAnchor, constant: -30),
             colorsView.heightAnchor.constraint(equalToConstant: 20)
         ])
+    }
+    
+    private func addTextAsLabel(textObject: TextObject) {
+        let label = ClassicLabel()
+        label.textObjectToLabel(textObject: textObject)
+        pictureView.addSubview(label.prepareLayout())
+        label.layoutConstraint()
     }
 }

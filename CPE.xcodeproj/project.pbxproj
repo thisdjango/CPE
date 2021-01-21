@@ -17,6 +17,7 @@
 		C47009DC24DD63410089FFEB /* Side.swift in Sources */ = {isa = PBXBuildFile; fileRef = C47009DB24DD63410089FFEB /* Side.swift */; };
 		C47009DE24DD6F510089FFEB /* TextFieldController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C47009DD24DD6F510089FFEB /* TextFieldController.swift */; };
 		C47009E024DD71620089FFEB /* Layout.swift in Sources */ = {isa = PBXBuildFile; fileRef = C47009DF24DD71620089FFEB /* Layout.swift */; };
+		C4F2792025B626E30038B385 /* ClassicLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4F2791F25B626E30038B385 /* ClassicLabel.swift */; };
 		C4F3957024DC59D8006841DF /* EditorHelp.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4F3956F24DC59D8006841DF /* EditorHelp.swift */; };
 		C4F3957224DC6F07006841DF /* TextStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4F3957124DC6F07006841DF /* TextStyle.swift */; };
 /* End PBXBuildFile section */
@@ -34,6 +35,7 @@
 		C47009DB24DD63410089FFEB /* Side.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Side.swift; sourceTree = "<group>"; };
 		C47009DD24DD6F510089FFEB /* TextFieldController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldController.swift; sourceTree = "<group>"; };
 		C47009DF24DD71620089FFEB /* Layout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Layout.swift; sourceTree = "<group>"; };
+		C4F2791F25B626E30038B385 /* ClassicLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClassicLabel.swift; sourceTree = "<group>"; };
 		C4F3956F24DC59D8006841DF /* EditorHelp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditorHelp.swift; sourceTree = "<group>"; };
 		C4F3957124DC6F07006841DF /* TextStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextStyle.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -93,6 +95,7 @@
 			children = (
 				C4F3956F24DC59D8006841DF /* EditorHelp.swift */,
 				C47009DF24DD71620089FFEB /* Layout.swift */,
+				C4F2791F25B626E30038B385 /* ClassicLabel.swift */,
 			);
 			path = Help;
 			sourceTree = "<group>";
@@ -208,6 +211,7 @@
 				C4F3957024DC59D8006841DF /* EditorHelp.swift in Sources */,
 				C47009D924DD62780089FFEB /* UIView.swift in Sources */,
 				C4561F1D24D6D13500841940 /* ColorsView.swift in Sources */,
+				C4F2792025B626E30038B385 /* ClassicLabel.swift in Sources */,
 				C4F3957224DC6F07006841DF /* TextStyle.swift in Sources */,
 				C47009DE24DD6F510089FFEB /* TextFieldController.swift in Sources */,
 				C47009E024DD71620089FFEB /* Layout.swift in Sources */,

@@ -9,12 +9,12 @@
 import UIKit
 
 
-@discardableResult func ~=(lhs: NSLayoutXAxisAnchor, rhs: NSLayoutXAxisAnchor) -> Bool {
+@discardableResult func ^=(lhs: NSLayoutXAxisAnchor, rhs: NSLayoutXAxisAnchor) -> Bool {
     lhs.constraint(equalTo: rhs).isActive = true
     return lhs.constraint(equalTo: rhs).isActive
 }
 
-@discardableResult func ~=(lhs: NSLayoutYAxisAnchor, rhs: NSLayoutYAxisAnchor) -> Bool {
+@discardableResult func ^=(lhs: NSLayoutYAxisAnchor, rhs: NSLayoutYAxisAnchor) -> Bool {
     lhs.constraint(equalTo: rhs).isActive = true
     return lhs.constraint(equalTo: rhs).isActive
 }

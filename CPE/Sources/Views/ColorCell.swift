@@ -20,7 +20,7 @@ class ColorCell: UICollectionViewCell {
     override init(frame: CGRect) {
         super.init(frame: frame)
         addSubview(colorView.prepareLayout())
-        colorView.pin(view: self)
+        colorView.pinEdgesToSuperviewEdges()
     }
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")

@@ -26,12 +26,13 @@ class ColorsView: UIView {
 
         collectionView = UICollectionView(frame: frame, collectionViewLayout: layout)
         collectionView.dataSource = self
+        collectionView.showsHorizontalScrollIndicator = false
         collectionView.delegate = self
         collectionView.register(ColorCell.self, forCellWithReuseIdentifier: ColorCell.cellId)
         collectionView.showsVerticalScrollIndicator = false
         collectionView.backgroundColor = .clear
         addSubview(collectionView.prepareLayout())
-        collectionView.pin(view: self)
+        collectionView.pinEdgesToSuperviewEdges()
     }
     
     required init?(coder: NSCoder) {

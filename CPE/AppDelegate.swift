@@ -20,7 +20,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 
         let frame = UIScreen.main.bounds
         window = UIWindow(frame: frame)
-
+        // can use force unwrap
         window!.rootViewController = navigation
         window!.makeKeyAndVisible()
         
