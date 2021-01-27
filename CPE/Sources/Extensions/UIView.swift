@@ -222,5 +222,25 @@ extension UILabel {
         font = textObject.font
         textColor = textObject.color
         text = textObject.string
+        alpha = textObject.transparent
+    }
+}
+
+extension UILabel {
+    @objc func scalePiece(_ gestureRecognizer: UIPinchGestureRecognizer) {
+        if gestureRecognizer.state == .began || gestureRecognizer.state == .changed {
+            
+            transform = (transform.scaledBy(
+                                                    x: gestureRecognizer.scale,
+                                                    y: gestureRecognizer.scale))
+            sizeToFit()
+            gestureRecognizer.scale = 1.0
+       }
+    }
+    @objc func rotate(_ gestureRecognizer: UIRotationGestureRecognizer) {
+        if gestureRecognizer.state == .began || gestureRecognizer.state == .changed {
+            transform = CGAffineTransform(rotationAngle: gestureRecognizer.rotation)
+            sizeToFit()
+        }
     }
 }

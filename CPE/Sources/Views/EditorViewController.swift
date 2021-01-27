@@ -10,11 +10,9 @@ import UIKit
 
 class EditorViewController: UIViewController {
     // MARK: - private props
-    private var color: UIColor = .white
-    private var textObjects = [TextObject]()
-    private var drawObjects = [String]()
     private var flexibleSpace = UIBarButtonItem()
     private var itemsToolbar = [UIBarButtonItem]()
+    private let viewCustom = TextCustomView()
     private var pictureView: UIImageView = {
         let imageView = UIImageView()
         imageView.image = UIImage(named: "picture")
@@ -23,7 +21,19 @@ class EditorViewController: UIViewController {
         imageView.backgroundColor = .clear
         return imageView
     }()
-    private var colorsView = ColorsView()
+//    private var colorsView = ColorsView()
+    private var visualEffect: UIVisualEffectView = {
+        let blur = UIBlurEffect(style: .regular)
+        let effect = UIVisualEffectView(effect: blur)
+        return effect.prepareLayout()
+    }()
+//    private var color: UIColor = .white
+    private var isTextModeHidden = true {
+        didSet {
+            viewCustom.isHidden = isTextModeHidden
+            visualEffect.isHidden = isTextModeHidden
+        }
+    }
     // MARK: - public props
     public var image: UIImage? {
         didSet {
@@ -35,9 +45,9 @@ class EditorViewController: UIViewController {
         super.viewDidLoad()
         title = "Edit"
         view.backgroundColor = .white
-        colorsView.onSelectColor = { [weak self] color in
-            self?.color = color
-        }
+//        colorsView.onSelectColor = { [weak self] color in
+//            self?.color = color
+//        }
         createToolbarItems()
         layoutConstraints()
     }
@@ -51,11 +61,11 @@ class EditorViewController: UIViewController {
     }
     // MARK: - objc methods
     @objc func textMode() {
-        let vc = TextFieldController()
-        vc.onDoneEditing = { textObj in
+        viewCustom.onDoneEditing = { textObj in
             self.addTextAsLabel(textObject: textObj)
+            self.isTextModeHidden = true
         }
-        present(vc, animated: true)
+        isTextModeHidden = !isTextModeHidden
     }
     @objc func shapesMode() {
         // TODO: - shaping
@@ -92,7 +102,16 @@ class EditorViewController: UIViewController {
     
     private func layoutConstraints() {
         view.addSubview(pictureView.prepareLayout())
-        view.addSubview(colorsView.prepareLayout())
+//        view.addSubview(colorsView.prepareLayout())
+        
+        view.addSubview(visualEffect)
+        view.addSubview(viewCustom.prepareLayout())
+        isTextModeHidden = true
+        visualEffect.pinEdgesToSuperviewEdges()
+        viewCustom.pinToSuperview([.left, .right])
+        viewCustom.heightAnchor ^= 300
+        viewCustom.centerAtSuperview()
+        
         pictureView.topAnchor ^= view.topAnchor + 50
         pictureView.pinToSuperview([.left, .right])
         NSLayoutConstraint.activate([
@@ -101,12 +120,6 @@ class EditorViewController: UIViewController {
             pictureView.topAnchor.constraint(equalTo: view.topAnchor, constant: 50),
             pictureView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -50)
         ])
-        NSLayoutConstraint.activate([
-            colorsView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            colorsView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            colorsView.bottomAnchor.constraint(equalTo: navigationController?.toolbar.topAnchor ?? view.bottomAnchor, constant: -30),
-            colorsView.heightAnchor.constraint(equalToConstant: 20)
-        ])
     }
     
     private func addTextAsLabel(textObject: TextObject) {
@@ -114,5 +127,10 @@ class EditorViewController: UIViewController {
         label.textObjectToLabel(textObject: textObject)
         pictureView.addSubview(label.prepareLayout())
         label.layoutConstraint()
+        label.adjustsFontSizeToFitWidth = true
+        label.minimumScaleFactor = 0.1
+        label.sizeToFit()
+        label.addGestureRecognizer(UIPinchGestureRecognizer(target: label, action: #selector(label.scalePiece)))
+        label.addGestureRecognizer(UIRotationGestureRecognizer(target: label, action: #selector(label.rotate)))
     }
 }

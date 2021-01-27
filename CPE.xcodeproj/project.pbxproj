@@ -15,8 +15,8 @@
 		C4561F1D24D6D13500841940 /* ColorsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4561F1C24D6D13500841940 /* ColorsView.swift */; };
 		C47009D924DD62780089FFEB /* UIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C47009D824DD62780089FFEB /* UIView.swift */; };
 		C47009DC24DD63410089FFEB /* Side.swift in Sources */ = {isa = PBXBuildFile; fileRef = C47009DB24DD63410089FFEB /* Side.swift */; };
-		C47009DE24DD6F510089FFEB /* TextFieldController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C47009DD24DD6F510089FFEB /* TextFieldController.swift */; };
 		C47009E024DD71620089FFEB /* Layout.swift in Sources */ = {isa = PBXBuildFile; fileRef = C47009DF24DD71620089FFEB /* Layout.swift */; };
+		C49675FF25C0D4DC002A123D /* TextCustomView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C49675FE25C0D4DC002A123D /* TextCustomView.swift */; };
 		C4F2792025B626E30038B385 /* ClassicLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4F2791F25B626E30038B385 /* ClassicLabel.swift */; };
 		C4F3957024DC59D8006841DF /* EditorHelp.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4F3956F24DC59D8006841DF /* EditorHelp.swift */; };
 		C4F3957224DC6F07006841DF /* TextStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4F3957124DC6F07006841DF /* TextStyle.swift */; };
@@ -33,8 +33,8 @@
 		C4561F1C24D6D13500841940 /* ColorsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorsView.swift; sourceTree = "<group>"; };
 		C47009D824DD62780089FFEB /* UIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIView.swift; sourceTree = "<group>"; };
 		C47009DB24DD63410089FFEB /* Side.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Side.swift; sourceTree = "<group>"; };
-		C47009DD24DD6F510089FFEB /* TextFieldController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldController.swift; sourceTree = "<group>"; };
 		C47009DF24DD71620089FFEB /* Layout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Layout.swift; sourceTree = "<group>"; };
+		C49675FE25C0D4DC002A123D /* TextCustomView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextCustomView.swift; sourceTree = "<group>"; };
 		C4F2791F25B626E30038B385 /* ClassicLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClassicLabel.swift; sourceTree = "<group>"; };
 		C4F3956F24DC59D8006841DF /* EditorHelp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditorHelp.swift; sourceTree = "<group>"; };
 		C4F3957124DC6F07006841DF /* TextStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextStyle.swift; sourceTree = "<group>"; };
@@ -85,7 +85,7 @@
 				C4561F1A24D6D0AA00841940 /* ColorCell.swift */,
 				C4561F0924D6CF4500841940 /* EditorViewController.swift */,
 				C4561F1C24D6D13500841940 /* ColorsView.swift */,
-				C47009DD24DD6F510089FFEB /* TextFieldController.swift */,
+				C49675FE25C0D4DC002A123D /* TextCustomView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -213,9 +213,9 @@
 				C4561F1D24D6D13500841940 /* ColorsView.swift in Sources */,
 				C4F2792025B626E30038B385 /* ClassicLabel.swift in Sources */,
 				C4F3957224DC6F07006841DF /* TextStyle.swift in Sources */,
-				C47009DE24DD6F510089FFEB /* TextFieldController.swift in Sources */,
 				C47009E024DD71620089FFEB /* Layout.swift in Sources */,
 				C47009DC24DD63410089FFEB /* Side.swift in Sources */,
+				C49675FF25C0D4DC002A123D /* TextCustomView.swift in Sources */,
 				C4561F0624D6CF4500841940 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
