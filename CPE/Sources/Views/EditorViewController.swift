@@ -21,13 +21,11 @@ class EditorViewController: UIViewController {
         imageView.backgroundColor = .clear
         return imageView
     }()
-//    private var colorsView = ColorsView()
     private var visualEffect: UIVisualEffectView = {
         let blur = UIBlurEffect(style: .regular)
         let effect = UIVisualEffectView(effect: blur)
         return effect.prepareLayout()
     }()
-//    private var color: UIColor = .white
     private var isTextModeHidden = true {
         didSet {
             viewCustom.isHidden = isTextModeHidden
@@ -45,9 +43,6 @@ class EditorViewController: UIViewController {
         super.viewDidLoad()
         title = "Edit"
         view.backgroundColor = .white
-//        colorsView.onSelectColor = { [weak self] color in
-//            self?.color = color
-//        }
         createToolbarItems()
         layoutConstraints()
     }
@@ -102,7 +97,6 @@ class EditorViewController: UIViewController {
     
     private func layoutConstraints() {
         view.addSubview(pictureView.prepareLayout())
-//        view.addSubview(colorsView.prepareLayout())
         
         view.addSubview(visualEffect)
         view.addSubview(viewCustom.prepareLayout())

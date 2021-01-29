@@ -27,6 +27,7 @@ class ColorCell: UICollectionViewCell {
     }
     override func layoutSubviews() {
         super.layoutSubviews()
+        isUserInteractionEnabled = true
         colorView.layer.cornerRadius = frame.height / 2
         colorView.layer.borderWidth = 1
         colorView.layer.borderColor = UIColor.lightGray.cgColor

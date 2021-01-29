@@ -16,10 +16,9 @@ class TextCustomView: UIView {
     private var colorView = ColorsView()
     // MARK: - Private Text Object
     private var textObject = TextObject()
-    private var addButton = UIButton(type: .contactAdd)
+    private var addButton = UIButton()
     override init(frame: CGRect) {
         super.init(frame: frame)
-        addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(dismiss)))
         backgroundColor = .clear
         addSubview(textField.prepareLayout())
         addSubview(slider.prepareLayout())
@@ -51,12 +50,14 @@ class TextCustomView: UIView {
         addButton.leadingAnchor ^= leadingAnchor
         addButton.trailingAnchor ^= trailingAnchor
         addButton.addTarget(self, action: #selector(done), for: .touchUpInside)
+        addButton.setTitle("Create", for: .normal)
     }
     
     @objc func dismiss() {
         endEditing(true)
     }
     @objc func done() {
+        endEditing(true)
         onDoneEditing?(textObject)
     }
     @objc func changeTransparency(_ sender: UISlider) {
